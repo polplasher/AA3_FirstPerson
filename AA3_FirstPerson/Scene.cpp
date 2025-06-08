@@ -7,9 +7,7 @@ Scene::Scene() {
 
 Scene::~Scene() {
 	// Clean up loaded models
-	for (auto& pair : modelCache) {
-		delete pair.second;
-	}
+	for (auto& pair : modelCache) { delete pair.second; }
 	modelCache.clear();
 }
 
@@ -51,6 +49,21 @@ void Scene::Initialize(CollisionSystem* collisionSystem) {
 				obj.x - halfWidth, obj.x + halfWidth,
 				obj.z - halfDepth, obj.z + halfDepth
 			);
+		}
+	}
+
+	// Initialize lighting for lanterns
+	int nextLightID = GL_LIGHT3; // Start from GL_LIGHT3 to avoid conflicts with sun/moon lights and flashlight
+	for (auto& obj : objects) {
+		if (obj.type == SceneObject::LANTERN) {
+			obj.lightID = nextLightID++;
+			glEnable(obj.lightID);
+			GLfloat lightPos[] = { obj.x, 2.2f, obj.z, 1.0f };
+			GLfloat diffuse[] = { 1.0f, 0.9f, 0.6f, 1.0f };
+
+			glLightfv(obj.lightID, GL_POSITION, lightPos);
+			glLightfv(obj.lightID, GL_DIFFUSE, diffuse);
+			glDisable(obj.lightID); // start off
 		}
 	}
 }

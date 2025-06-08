@@ -114,8 +114,7 @@ void Game::TimerCallback(int value) {
 }
 
 void Game::KeyDownCallback(unsigned char key, int x, int y) {
-
-    if (!instance) return;
+    if (!instance) { return; }
     instance->inputManager->KeyDown(key, x, y);
 
     // If we press ESC, we release the cursor and exit window mode.
@@ -125,13 +124,27 @@ void Game::KeyDownCallback(unsigned char key, int x, int y) {
         return;
     }
 
-    if ((key == 'f' || key == 'F') && instance->lightingSystem->IsNight()) {
+	if ((key == 'f' || key == 'F') && instance->lightingSystem->IsNight()) { // toggle flashlight only at night
         instance->lightingSystem->ToggleFlashlight();
+    }
+    else if ((key == 'e' || key == 'E')) { // toggle interactable lanterns
+        for (auto& obj : instance->scene->GetObjects()) {
+            if (obj.type == SceneObject::LANTERN) {
+                float dx = obj.x - instance->player->GetX();
+                float dz = obj.z - instance->player->GetZ();
+                float distSq = dx * dx + dz * dz;
+                if (distSq < 4.0f) { // distance < 2.0
+                    obj.lightOn = !obj.lightOn;
+                    if (obj.lightID >= 0) {
+                        if (obj.lightOn) { glEnable(obj.lightID); }
+                        else { glDisable(obj.lightID); }
+                    }
+                }
+            }
+        }
     }
 }
 
 void Game::KeyUpCallback(unsigned char key, int x, int y) {
-    if (instance) {
-        instance->inputManager->KeyUp(key, x, y);
-    }
+    if (instance) { instance->inputManager->KeyUp(key, x, y); }
 }

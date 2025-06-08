@@ -15,6 +15,10 @@ struct SceneObject {
     float rotationY = 0.0f;
     Model* model = nullptr;
     std::string modelPath;
+
+    // New field for lanterns
+    bool lightOn = false;
+    int lightID = -1; // ID for the lantern light
 };
 
 class Scene {
@@ -42,5 +46,5 @@ public:
     void AddModel(const std::string& modelPath, float x, float z, float scale = 1.0f,
         float rotY = 0.0f, float r = 0.7f, float g = 0.7f, float b = 0.7f);
 
-    const std::vector<SceneObject>& GetObjects() const { return objects; }
+    std::vector<SceneObject>& GetObjects() { return objects; }
 };

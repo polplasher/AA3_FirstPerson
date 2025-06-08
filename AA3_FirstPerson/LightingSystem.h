@@ -15,7 +15,6 @@ public:
 
     void Initialize();
     void Update(float deltaTime, Player* player);
-    void UpdateDayNightCycle();
     void UpdateFlashlight(Player* player);
 
     void ToggleFlashlight();
