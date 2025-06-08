@@ -6,6 +6,8 @@ private:
     std::array<bool, 256> keys;
     std::array<bool, 256> prevKeys;
 
+    float  mouseDeltaX, mouseDeltaY;
+
 public:
     InputManager();
 
@@ -15,4 +17,9 @@ public:
 
     bool IsKeyPressed(unsigned char key) const;
     bool IsKeyJustPressed(unsigned char key) const;
+
+    void AddMouseDelta(int dx, int dy);
+    float GetMouseDeltaX() const;
+    float GetMouseDeltaY() const;
+    void  ClearMouseDeltas();
 };

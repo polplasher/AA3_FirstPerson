@@ -30,13 +30,19 @@ void Camera::Update(Player* player) {
 
 void Camera::ApplyTransform(Player* player) {
     glLoadIdentity();
+    float yaw = player->GetYaw();
+    float pitch = player->GetPitch();
+    float cosP = cosf(pitch);
 
-    float dirX = sinf(player->GetYaw());
-    float dirZ = -cosf(player->GetYaw());
+    float dirX = cosP * sinf(yaw);
+    float dirY = sinf(pitch);
+    float dirZ = -cosP * cosf(yaw);
 
     gluLookAt(
         player->GetX(), player->GetY(), player->GetZ(),
-        player->GetX() + dirX, player->GetY(), player->GetZ() + dirZ,
+        player->GetX() + dirX,
+        player->GetY() + dirY,
+        player->GetZ() + dirZ,
         0.0f, 1.0f, 0.0f
     );
 }

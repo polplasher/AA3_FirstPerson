@@ -3,6 +3,7 @@
 InputManager::InputManager() {
     keys.fill(false);
     prevKeys.fill(false);
+    mouseDeltaX = mouseDeltaY = 0.0f;
 }
 
 void InputManager::KeyDown(unsigned char key, int x, int y) {
@@ -18,6 +19,13 @@ void InputManager::Update() {
     for (int i = 0; i < 256; i++) {
         prevKeys[i] = keys[i];
     }
+
+    ClearMouseDeltas();
+}
+
+void InputManager::AddMouseDelta(int dx, int dy) {
+    mouseDeltaX += dx;
+    mouseDeltaY += dy;
 }
 
 bool InputManager::IsKeyPressed(unsigned char key) const {
@@ -27,3 +35,7 @@ bool InputManager::IsKeyPressed(unsigned char key) const {
 bool InputManager::IsKeyJustPressed(unsigned char key) const {
     return keys[key] && !prevKeys[key];
 }
+
+float InputManager::GetMouseDeltaX() const { return mouseDeltaX; }
+float InputManager::GetMouseDeltaY() const { return mouseDeltaY; }
+void  InputManager::ClearMouseDeltas() { mouseDeltaX = mouseDeltaY = 0.0f; }

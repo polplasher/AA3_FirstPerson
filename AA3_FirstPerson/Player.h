@@ -10,6 +10,7 @@ private:
     float yaw;          // horizontal angle in radians
     float moveSpeed;    // movement speed
     float rotSpeed;     // rotation speed
+    float pitch;
 
 public:
     Player();
@@ -23,6 +24,7 @@ public:
     float GetYaw() const { return yaw; }
     float GetMoveSpeed() const { return moveSpeed; }
     float GetRotSpeed() const { return rotSpeed; }
+    float GetPitch() const { return pitch; }
 
     // Setters
     void SetPosition(float newX, float newY, float newZ);

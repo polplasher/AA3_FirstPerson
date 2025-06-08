@@ -52,6 +52,23 @@ void Game::Initialize(int argc, char** argv) {
     glutKeyboardFunc(KeyDownCallback);
     glutKeyboardUpFunc(KeyUpCallback);
 
+    // Hide the cursor and center
+    glutSetCursor(GLUT_CURSOR_NONE);
+    glutWarpPointer(winWidth / 2, winHeight / 2);
+
+    // Mouse movement callback
+    glutPassiveMotionFunc([](int x, int y) {
+        if (Game::instance) {
+            int cx = Game::instance->winWidth / 2;
+            int cy = Game::instance->winHeight / 2;
+            int dx = x - cx;
+            int dy = cy - y;
+            Game::instance->inputManager->AddMouseDelta(dx, dy);
+            glutWarpPointer(cx, cy);
+
+        }
+        });
+
     glClearColor(0.5f, 0.8f, 1.0f, 1.0f);
 }
 
@@ -97,11 +114,19 @@ void Game::TimerCallback(int value) {
 }
 
 void Game::KeyDownCallback(unsigned char key, int x, int y) {
-    if (instance) {
-        instance->inputManager->KeyDown(key, x, y);
-        if ((key == 'f' || key == 'F') && instance->lightingSystem->IsNight()) {
-            instance->lightingSystem->ToggleFlashlight();
-        }
+
+    if (!instance) return;
+    instance->inputManager->KeyDown(key, x, y);
+
+    // If we press ESC, we release the cursor and exit window mode.
+    if (key == 27) { 
+        glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+        glutLeaveMainLoop();
+        return;
+    }
+
+    if ((key == 'f' || key == 'F') && instance->lightingSystem->IsNight()) {
+        instance->lightingSystem->ToggleFlashlight();
     }
 }
 

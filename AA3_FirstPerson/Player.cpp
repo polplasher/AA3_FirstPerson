@@ -3,7 +3,7 @@
 #include "CollisionSystem.h"
 #include <cmath>
 
-Player::Player() : x(0.0f), y(1.0f), z(5.0f), yaw(0.0f), moveSpeed(0.1f), rotSpeed(0.03f) {
+Player::Player() : x(0.0f), y(1.0f), z(5.0f), yaw(0.0f), pitch(0), moveSpeed(0.1f), rotSpeed(0.03f) {
 }
 
 void Player::SetPosition(float newX, float newY, float newZ) {
@@ -24,12 +24,28 @@ void Player::Update(InputManager* inputManager, CollisionSystem* collisionSystem
         dx += -sinf(yaw) * moveSpeed;
         dz += cosf(yaw) * moveSpeed;
     }
+    if (inputManager->IsKeyPressed('a') || inputManager->IsKeyPressed('A')) {
+        dx += -cosf(yaw) * moveSpeed;
+        dz += -sinf(yaw) * moveSpeed;
+    }
     if (inputManager->IsKeyPressed('d') || inputManager->IsKeyPressed('D')) {
+        dx += cosf(yaw) * moveSpeed;
+        dz += sinf(yaw) * moveSpeed;
+    }
+
+    if (inputManager->IsKeyPressed('e') || inputManager->IsKeyPressed('E')) {
         yaw += rotSpeed;
     }
-    if (inputManager->IsKeyPressed('a') || inputManager->IsKeyPressed('A')) {
+    if (inputManager->IsKeyPressed('q') || inputManager->IsKeyPressed('Q')) {
         yaw -= rotSpeed;
     }
+
+    // Quick turn with the mouse
+    yaw += inputManager->GetMouseDeltaX() * 0.005f;
+    pitch += inputManager->GetMouseDeltaY() * 0.005f;
+    // Clamp pitch
+    if (pitch < -1.5f)      pitch = -1.5f;
+    else if (pitch > 1.5f) pitch = 1.5f;
 
     // Check for collisions before moving
     float newX = x + dx;
@@ -38,4 +54,6 @@ void Player::Update(InputManager* inputManager, CollisionSystem* collisionSystem
         x = newX;
         z = newZ;
     }
+
+    inputManager->ClearMouseDeltas();
 }
