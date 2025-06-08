@@ -45,13 +45,13 @@ void LightingSystem::Initialize() {
     glLightfv(GL_LIGHT1, GL_POSITION, moonPos);
 
     // Flashlight parameters
-    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 30.0f);
-    glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 64.0f);
-    glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 1.0f);
+    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 45.0f);  
+    glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 10.0f);  
+    glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.2f);
     glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.05f);
-    glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.0f);
+    glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.01f);
 
-    GLfloat flashAmbient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    GLfloat flashAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
     GLfloat flashDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     GLfloat flashSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     glLightfv(GL_LIGHT2, GL_AMBIENT, flashAmbient);
@@ -116,7 +116,7 @@ void LightingSystem::UpdateFlashlight(Player* player) {
 
     // Set flashlight position to player position
     GLfloat lightPos[] = { player->GetX(), player->GetY(), player->GetZ(), 1.0f };
-    GLfloat spotDir[] = { dirX, 0.0f, dirZ };
+    GLfloat spotDir[] = { dirX, -0.26f,  dirZ };
 
     glLightfv(GL_LIGHT2, GL_POSITION, lightPos);
     glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, spotDir);
