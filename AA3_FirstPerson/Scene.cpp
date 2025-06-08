@@ -12,12 +12,6 @@ Scene::~Scene() {
 }
 
 void Scene::Initialize(CollisionSystem* collisionSystem) {
-	// Initialize scene objects and add them to the collision system
-	// This would replace the hard-coded objects in the original code
-
-	// For simplicity, we can add objects with their positions here
-	// In a real implementation, these might be loaded from a file
-
 	// Add tombs
 	objects.push_back({ SceneObject::TOMB, 2.0f, -2.0f, 1.0f, 1.0f, 0.5f });
 	objects.push_back({ SceneObject::TOMB, -3.0f, 4.0f, 1.0f, 1.0f, 0.5f });
@@ -56,7 +50,7 @@ void Scene::Initialize(CollisionSystem* collisionSystem) {
 			obj.lightID = nextLightID++;
 			glEnable(obj.lightID);
 			GLfloat lightPos[] = { obj.x, 2.2f, obj.z, 1.0f };
-			GLfloat diffuse[] = { 1.0f, 0.9f, 0.6f, 1.0f };
+			GLfloat diffuse[] = { 1.0f, 0.8f, 0.2f, 1.0f };
 
 			glLightfv(obj.lightID, GL_POSITION, lightPos);
 			glLightfv(obj.lightID, GL_DIFFUSE, diffuse);
