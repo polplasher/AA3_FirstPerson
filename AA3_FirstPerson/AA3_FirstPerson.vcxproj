@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
+    <ClCompile Include="DayCycle.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LightingSystem.cpp" />
@@ -141,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionSystem.h" />
+    <ClInclude Include="DayCycle.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LightingSystem.h" />

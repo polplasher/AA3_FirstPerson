@@ -1,9 +1,9 @@
 #pragma once
+#include "Model.h"
 #include <GL/freeglut.h>
-#include <vector>
 #include <map>
 #include <string>
-#include "Model.h"
+#include <vector>
 
 class CollisionSystem;
 
@@ -23,28 +23,28 @@ struct SceneObject {
 
 class Scene {
 private:
-    std::vector<SceneObject> objects;
-    std::map<std::string, Model*> modelCache; // Cache loaded models
+	std::vector<SceneObject> objects;
+	std::map<std::string, Model*> modelCache; // Cache loaded models
 
 public:
-    Scene();
-    ~Scene();
+	Scene();
+	~Scene();
 
-    void Initialize(CollisionSystem* collisionSystem);
-    void Draw();
+	void Initialize(CollisionSystem* collisionSystem);
+	void Draw();
 
-    void DrawGround();
-    void DrawFence();
-    void DrawPath(float x, float z, float width, float length);
-    void DrawTomb(float x, float z);
-    void DrawMausoleum(float x, float z);
-    void DrawLantern(float x, float z);
-    void DrawBush(float x, float z);
-    void DrawModel(const SceneObject& obj);
+	void DrawGround();
+	void DrawFence();
+	void DrawPath(float x, float z, float width, float length);
+	void DrawTomb(float x, float z);
+	void DrawMausoleum(float x, float z);
+	void DrawLantern(float x, float z);
+	void DrawBush(float x, float z);
+	void DrawModel(const SceneObject& obj);
 
-    // New method to add a 3D model to the scene
-    void AddModel(const std::string& modelPath, float x, float z, float scale = 1.0f,
-        float rotY = 0.0f, float r = 0.7f, float g = 0.7f, float b = 0.7f);
+	// New method to add a 3D model to the scene
+	void AddModel(const std::string& modelPath, float x, float z, float scale = 1.0f,
+		float rotY = 0.0f, float r = 0.7f, float g = 0.7f, float b = 0.7f);
 
     std::vector<SceneObject>& GetObjects() { return objects; }
 };

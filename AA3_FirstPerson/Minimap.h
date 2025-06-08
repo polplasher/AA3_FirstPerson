@@ -18,7 +18,7 @@ public:
     Minimap();
 
     void Update(InputManager* inputManager);
-    void Draw(Player* player, Scene* scene);
+    void Draw(Player* player, Scene* scene) const;
 
     void SetPosition(int x, int y);
     void SetDimensions(int width, int height);

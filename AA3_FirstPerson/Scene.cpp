@@ -22,9 +22,6 @@ void Scene::Initialize(CollisionSystem* collisionSystem) {
 	objects.push_back({ SceneObject::TOMB, 2.0f, -2.0f, 1.0f, 1.0f, 0.5f });
 	objects.push_back({ SceneObject::TOMB, -3.0f, 4.0f, 1.0f, 1.0f, 0.5f });
 
-	// Add mausoleum
-	objects.push_back({ SceneObject::MAUSOLEUM, 8.0f, 8.0f, 2.0f, 2.0f, 2.0f });
-
 	// Add lanterns
 	objects.push_back({ SceneObject::LANTERN, 0.0f, -8.0f, 0.1f, 2.0f, 0.1f });
 	objects.push_back({ SceneObject::LANTERN, 5.0f, 5.0f, 0.1f, 2.0f, 0.1f });
@@ -113,9 +110,6 @@ void Scene::Draw() {
 		switch (obj.type) {
 		case SceneObject::TOMB:
 			DrawTomb(obj.x, obj.z);
-			break;
-		case SceneObject::MAUSOLEUM:
-			DrawMausoleum(obj.x, obj.z);
 			break;
 		case SceneObject::LANTERN:
 			DrawLantern(obj.x, obj.z);
@@ -226,24 +220,6 @@ void Scene::DrawTomb(float x, float z) {
 	glPopMatrix();
 
 	glPopMatrix();
-}
-
-void Scene::DrawMausoleum(float x, float z) {
-	glColor3f(0.5f, 0.5f, 0.5f);
-	glPushMatrix();
-	glTranslatef(x, 1.0f, z);
-	glScalef(2.0f, 2.0f, 2.0f);
-	glutSolidCube(1.0f);
-	glPopMatrix();
-
-	// Door (a black quad)
-	glColor3f(0.1f, 0.1f, 0.1f);
-	glBegin(GL_QUADS);
-	glVertex3f(x - 0.5f, 0.0f, z + 1.01f);
-	glVertex3f(x + 0.5f, 0.0f, z + 1.01f);
-	glVertex3f(x + 0.5f, 1.5f, z + 1.01f);
-	glVertex3f(x - 0.5f, 1.5f, z + 1.01f);
-	glEnd();
 }
 
 void Scene::DrawLantern(float x, float z) {
