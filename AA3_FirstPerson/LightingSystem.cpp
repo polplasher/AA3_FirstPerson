@@ -100,6 +100,10 @@ void LightingSystem::Update(float deltaTime, Player* player) {
         glClearColor(0.5f, 0.8f, 1.0f, 1.0f);   // Sky blue day color
     }
 
+    if (!isNight && flashlightOn) {
+        flashlightOn = false;   
+    }
+
     // Flashlight control: only active at night and if user turned it on
     if (isNight && flashlightOn) {
         glEnable(GL_LIGHT2);
@@ -111,7 +115,7 @@ void LightingSystem::Update(float deltaTime, Player* player) {
 }
 
 void LightingSystem::UpdateFlashlight(Player* player) {
-    float dirX = sinf(player->GetYaw());
+    float dirX = sinf(player->GetYaw());https://play.max.com/
     float dirZ = -cosf(player->GetYaw());
 
     // Set flashlight position to player position
