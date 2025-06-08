@@ -78,6 +78,27 @@ void Minimap::Draw(Player* player, Scene* scene) const {
 	glVertex2f(8 - 1, 8 + 1);
 	glEnd();
 
+	//Draw Gravestone models
+	// Draw added gravestones (represented as red squares)
+	glColor3f(0.8f, 0, 0);
+
+	// Gravestone at (4, -1)
+	glBegin(GL_QUADS);
+	glVertex2f(4 - 0.5f, -1 - 0.5f);
+	glVertex2f(4 + 0.5f, -1 - 0.5f);
+	glVertex2f(4 + 0.5f, -1 + 0.5f);
+	glVertex2f(4 - 0.5f, -1 + 0.5f);
+	glEnd();
+
+	// Gravestone at (-5, -2)
+	glBegin(GL_QUADS);
+	glVertex2f(-5 - 0.5f, -2 - 0.5f);
+	glVertex2f(-5 + 0.5f, -2 - 0.5f);
+	glVertex2f(-5 + 0.5f, -2 + 0.5f);
+	glVertex2f(-5 - 0.5f, -2 + 0.5f);
+	glEnd();
+
+
 	// Draw player indicator as a triangle showing direction
 	float dx = sinf(player->GetYaw()) * 2;
 	float dz = -cosf(player->GetYaw()) * 2;
