@@ -1,6 +1,6 @@
-#include "Scene.h"
 #include "CollisionSystem.h"
 #include "Game.h"
+#include "Scene.h"
 
 Scene::Scene() {
 }
@@ -38,7 +38,9 @@ void Scene::Initialize(CollisionSystem* collisionSystem) {
 	objects.push_back({ SceneObject::PATH, 0.0f, 0.0f, 3.0f, 0.1f, 20.0f });
 	objects.push_back({ SceneObject::PATH, -5.0f, 5.0f, 2.0f, 0.1f, 10.0f });
 
-	AddModel("models/gravestone.obj", 4.0f, -5.0f, 1);
+	//AddModel("models/mausoleum.obj", 4, -5);
+	AddModel("models/gravestone1.obj", 4, -1);
+	AddModel("models/gravestone2.obj", -5, -2, 1.4);
 
 	// Add to collision system
 	for (const auto& obj : objects) {

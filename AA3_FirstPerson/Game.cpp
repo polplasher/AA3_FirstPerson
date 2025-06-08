@@ -99,7 +99,7 @@ void Game::TimerCallback(int value) {
 void Game::KeyDownCallback(unsigned char key, int x, int y) {
     if (instance) {
         instance->inputManager->KeyDown(key, x, y);
-        if ((key == 'l' || key == 'L') && instance->lightingSystem->IsNight()) {
+        if ((key == 'f' || key == 'F') && instance->lightingSystem->IsNight()) {
             instance->lightingSystem->ToggleFlashlight();
         }
     }
