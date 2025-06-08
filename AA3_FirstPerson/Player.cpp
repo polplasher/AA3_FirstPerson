@@ -33,19 +33,13 @@ void Player::Update(InputManager* inputManager, CollisionSystem* collisionSystem
         dz += sinf(yaw) * moveSpeed;
     }
 
-    if (inputManager->IsKeyPressed('e') || inputManager->IsKeyPressed('E')) {
-        yaw += rotSpeed;
-    }
-    if (inputManager->IsKeyPressed('q') || inputManager->IsKeyPressed('Q')) {
-        yaw -= rotSpeed;
-    }
-
-    // Quick turn with the mouse
-    yaw += inputManager->GetMouseDeltaX() * 0.005f;
-    pitch += inputManager->GetMouseDeltaY() * 0.005f;
-    // Clamp pitch
-    if (pitch < -1.5f)      pitch = -1.5f;
-    else if (pitch > 1.5f) pitch = 1.5f;
+    // turn with the mouse
+    yaw += inputManager->GetMouseDeltaX() * 0.001f;
+    pitch += inputManager->GetMouseDeltaY() * 0.001f;
+    
+    // clamp pitch
+    if (pitch < -1.5f) { pitch = -1.5f; }
+    else if (pitch > 1.5f) { pitch = 1.5f; }
 
     // Check for collisions before moving
     float newX = x + dx;

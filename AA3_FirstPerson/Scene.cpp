@@ -41,7 +41,7 @@ void Scene::Initialize(CollisionSystem* collisionSystem) {
 	AddModel("models/gravestone2.obj", -5, -2, 1.4);
 
 	// Add to collision system
-	for (const auto& obj : objects) {
+	for (const SceneObject& obj : objects) {
 		if (obj.type == SceneObject::MODEL) {
 			float halfWidth = obj.width / 2.0f;
 			float halfDepth = obj.depth / 2.0f;
@@ -54,7 +54,7 @@ void Scene::Initialize(CollisionSystem* collisionSystem) {
 
 	// Initialize lighting for lanterns
 	int nextLightID = GL_LIGHT3; // Start from GL_LIGHT3 to avoid conflicts with sun/moon lights and flashlight
-	for (auto& obj : objects) {
+	for (SceneObject& obj : objects) {
 		if (obj.type == SceneObject::LANTERN) {
 			obj.lightID = nextLightID++;
 			glEnable(obj.lightID);
