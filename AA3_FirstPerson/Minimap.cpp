@@ -52,7 +52,6 @@ void Minimap::Draw(Player* player, Scene* scene) const {
 	glEnd();
 
 	// Draw tombs (represented as red squares)
-	// This hardcoded drawing should be replaced with accessing scene objects
 	glColor3f(0.8f, 0, 0);
 	glBegin(GL_QUADS);
 	glVertex2f(2 - 0.5f, -2 - 0.5f);
@@ -73,8 +72,8 @@ void Minimap::Draw(Player* player, Scene* scene) const {
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glBegin(GL_QUADS);
 	glVertex2f(8 - 1, 8 - 1);
-	glVertex2f(8 + 1, 8 - 1);
-	glVertex2f(8 + 1, 8 + 1);
+	glVertex2f(8 + 2, 8 - 1);
+	glVertex2f(8 + 2, 8 + 1);
 	glVertex2f(8 - 1, 8 + 1);
 	glEnd();
 

@@ -27,7 +27,7 @@ void Scene::Initialize(CollisionSystem* collisionSystem) {
 	objects.push_back({ SceneObject::PATH, 0.0f, 0.0f, 3.0f, 0.1f, 20.0f });
 	objects.push_back({ SceneObject::PATH, -5.0f, 5.0f, 2.0f, 0.1f, 10.0f });
 
-	//AddModel("models/mausoleum.obj", 4, -5);
+	AddModel("models/mausoleum.obj", 7, 7, 1, -90);
 	AddModel("models/gravestone1.obj", 4, -1);
 	AddModel("models/gravestone2.obj", -5, -2, 1.4);
 
